@@ -2,13 +2,14 @@ import java.util.Scanner;
 
 /**
  * Marked Assignment 3 - Mathematic Methods
- * 1.
- * 2.
- * 3.
- * 4.
- * 5.
- * 6.
- * 7.
+ * 1. Implement method area to calculate area of circle using B = PI * r2
+ * 2. Implement method pythagoras to calculate hypotenuse using Pythagoras' theorem. (a2 + b2 = c2)
+ * 3. Implement method area with overloading to calculate area of a cone using M = Pi * r * s (hypotenuse). Use method from step 2
+ * 4. Implement method volume to calculate volume of a cone using V = (pi * r2 * h) / 3
+ * 5. Implement method gcd to reduce the fraction using Euclide's algorithm
+ * 6. Implement method fractions to convert numerator and denominator to integer and shorten the fraction to minimal using gcd from step 5
+ * 7. Implement method printFraction to print the fraction in correct way
+ * 8. Implement method input that reads user input and returns positive integer or -1 if user wants to quit
  * @author Jonas Wennberg (wenjon-3)
  */
 public class Main {
@@ -51,7 +52,6 @@ public class Main {
         // While loop that runs until user enters "q" for area and volume.
 
         while (true) {
-
             radius = input();
             if (radius == QUIT) {
                 break;
@@ -76,7 +76,6 @@ public class Main {
 
         // While loop that runs until user enters "q" for the fraction part
         while (true) {
-
             numerator = input();
             if (numerator == QUIT) {
                 break;
@@ -93,8 +92,8 @@ public class Main {
     }
     /**
      * Method calculating Area of a circle
-     * @param radius
-     * @return area
+     * @param radius - Radius of the circle
+     * @return area - Return the calculated area
      */
     public static double area(final int radius) {
         double area = 0.0;
@@ -107,7 +106,7 @@ public class Main {
      * Method calculating Area of a cone
      * @param radius - Radius of the surface of the cone
      * @param height - Height of the cone
-     * @return area
+     * @return area - Return the area of the cone
      */
     public static double area(final int radius, final int height) {
         double area = 0.0;
@@ -122,12 +121,10 @@ public class Main {
      * Method calculating the hypotenuse using pythagoras theorem
      * @param sideA - Side A of the triangle
      * @param sideB - Side B of the triangle
-     * @return s
+     * @return s - Return the hyptenuse
      */
     public static double pythagoras(final int sideA, final int sideB) {
         double c = 0.0;
-
-        // Make sure the sides are positive
 
         // Calculate hypotenuse a2 + b2 = c2
         c = (Math.pow(sideA, EXPONENT) + Math.pow(sideB, EXPONENT));
@@ -138,12 +135,10 @@ public class Main {
      * Method calculating the volume
      * @param radius - Radius of the surface of the cone
      * @param height - Height of the cone
-     * @return volume
+     * @return volume - Return the volume of the cone
      */
     public static double volume(final int radius, final int height) {
         double volume = 0.0;
-
-        // Make sure radius and height are positive numbers
 
         // Calculate volume
         volume = (Math.PI * Math.pow(radius, EXPONENT) * height) / DENOMINATOR;
@@ -160,11 +155,13 @@ public class Main {
         int denom = 0;
         int integer = 0;
 
-        if(denominator == ZERO) {
+        // Check and act if numerator or denominator is 0
+        if (denominator == ZERO) {
             return null;
-        } else if(numerator == ZERO) {
+        } else if (numerator == ZERO) {
             return new int[]{ZERO, ZERO, ZERO};
         }
+        // Calculate the fraction
         integer = numerator / denominator;
         num = numerator % denominator;
         denom = denominator;
@@ -197,7 +194,7 @@ public class Main {
         }
 
         // Find the gcd
-        while(internalB != ZERO) {
+        while (internalB != ZERO) {
             internalC = internalA % internalB;
             internalA = internalB;
             internalB = internalC;
@@ -210,31 +207,36 @@ public class Main {
      * @param parts - Integer array with the 3 parts to print
      */
     public static void printFraction(final int[] parts) {
-        if(parts == null) {
+        if (parts == null) {
             System.out.println("Error");
-        } else if(parts[2] == ZERO) {
+        } else if (parts[2] == ZERO) {
             System.out.printf("%d%n", ZERO);
-        } else if(parts[1] == ZERO) {
+        } else if (parts[1] == ZERO) {
             System.out.printf("%d%n", parts[0]);
-        } else if(parts[0] == ZERO) {
+        } else if (parts[0] == ZERO) {
             System.out.printf("%d/%d%n", parts[1], parts[2]);
         } else {
             System.out.printf("%d %d/%d%n", parts[0], parts[1], parts[2]);
         }
     }
+    /**
+     * Method for getting input from user
+     *
+     * @return userInput - return the input from the user
+     */
     public static int input() {
         int userInput = 0;
 
-        while(true) {
-            if(userInputScanner.hasNextInt()) {
+        while (true) {
+            if (userInputScanner.hasNextInt()) {
                 userInput = userInputScanner.nextInt();
-                if(userInput >= ZERO) {
+                if (userInput >= ZERO) {
                     break;
                 } else {
                     userInput = Math.abs(userInput);
                     break;
                 }
-            } else if(userInputScanner.hasNext()) {
+            } else if (userInputScanner.hasNext()) {
                 String inString = userInputScanner.next();
                 if (inString.equalsIgnoreCase("q")) {
                     userInput = -1;
@@ -244,6 +246,4 @@ public class Main {
         }
         return userInput;
     }
-
-
 }
